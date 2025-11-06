@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Beaker, BookOpen, Globe, Compass, Info, School, Sparkles } from 'lucide-react';
 import { Approfondimenti, Boosts, Confronto, Labels, Liceo, Score, Step } from './types';
@@ -46,7 +45,7 @@ export const approfondimenti: Approfondimenti = {
     ],
   },
   benessere: {
-    titolo: "Benessere| stare bene a scuola: Come è impostata l’organizzazione della scuola per farmi stare bene?",
+    titolo: "Benessere a scuola: Come è impostata l’organizzazione della scuola per farmi stare bene?",
     // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
     icon: React.createElement(Sparkles, { size: 24 }),
     contenuto: [
@@ -69,11 +68,11 @@ export const approfondimenti: Approfondimenti = {
 
 // Licei Data
 export const catalogoLicei: Liceo[] = [
-  { id: "classico-int", nome: "Licei Classico Internazionale", profilo: "Per chi ama le materie umanistiche, la cultura e le lingue classiche", cambridgeMaterie: parseCambridge("geography, biology e english as a second language") },
-  { id: "scientifico-int", nome: "Licei Scientifico Internazionale", profilo: "Per chi ha attitudine ad un approccio logico-matematico, sperimentale tipico dell'indagine scientifica.", cambridgeMaterie: parseCambridge("geography, biology, business studies, Maths, Physics, Art & Design, english as a second language") },
-  { id: "linguistico-moderno", nome: "Licei Linguistico Moderno", profilo: "Per chi ama le lingue straniere, la storia dell'arte e le materie umanistiche", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a second language") },
+  { id: "classico-int", nome: "Liceo Classico Internazionale", profilo: "Per chi ama le materie umanistiche, la cultura e le lingue classiche", cambridgeMaterie: parseCambridge("geography, biology e english as a second language") },
+  { id: "scientifico-int", nome: "Liceo Scientifico Internazionale", profilo: "Per chi ha attitudine ad un approccio logico-matematico, sperimentale tipico dell'indagine scientifica.", cambridgeMaterie: parseCambridge("geography, biology, business studies, Maths, Physics, Art & Design, english as a second language") },
+  { id: "linguistico-moderno", nome: "Liceo Linguistico Moderno", profilo: "Per chi ama le lingue straniere, la storia dell'arte e le materie umanistiche", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a second language") },
   { id: "linguistico-giuridico", nome: "Liceo Linguistico Giuridico Economico", profilo: "Per chi vuole unire all'approccio linguistico quello economico aziendale", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a second language") },
-  { id: "scienze-umane-es", nome: "Licei delle Scienze Umane opzione economico-sociale", profilo: "Per chi vuole indagare la realtà sociale sia con le categorie della psicologia, sociologia e pedagogia, sia con le scienze economico giuridiche", cambridgeMaterie: parseCambridge("geography") },
+  { id: "scienze-umane-es", nome: "Liceo delle Scienze Umane opzione economico-sociale", profilo: "Per chi vuole indagare la realtà sociale sia con le categorie della psicologia, sociologia e pedagogia, sia con le scienze economico giuridiche", cambridgeMaterie: parseCambridge("geography") },
 ];
 
 // Comparison Data
@@ -126,7 +125,7 @@ export const baseSteps: Step[] = [
     opzioni: [{ id: "lab_ricerca", label: labels.lab_ricerca }, { id: "biblioteca", label: labels.biblioteca }, { id: "relazioni_internaz", label: labels.relazioni_internaz }, { id: "impresa_pubblica", label: labels.impresa_pubblica }],
     sidebarLabel: "Visione futura",
   },
-  { id: "risultato", tipo: "output", titolo: "Il tuo liceo consigliato", sidebarLabel: "Risultato" },
+  { id: "risultato", tipo: "output", titolo: "Il percorso più adatto a te è:", sidebarLabel: "Risultato" },
 ];
 
 // Scoring Logic

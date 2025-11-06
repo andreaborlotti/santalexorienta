@@ -1,5 +1,4 @@
-
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useLayoutEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, RotateCcw, Sparkles, List, Maximize, Minimize } from "lucide-react";
 
@@ -21,6 +20,10 @@ export default function App() {
   const [dettaglioModale, setDettaglioModale] = useState<string | null>(null);
   const [showCatalog, setShowCatalog] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+
+  // State and Refs for dynamic height synchronization
+  const [sectionHeights, setSectionHeights] = useState({ profile: 0, cambridge: 0, confronto: 0 });
+  const liceoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleFullscreen = async () => {
     if (!document.fullscreenElement) {
@@ -83,6 +86,32 @@ export default function App() {
     
     return { topIds, licei };
   }, [score]);
+
+  useLayoutEffect(() => {
+    if (top.licei.length === 2 && liceoRefs.current[0] && liceoRefs.current[1]) {
+      const node1 = liceoRefs.current[0];
+      const node2 = liceoRefs.current[1];
+      
+      const profile1 = node1.querySelector('.profile-section')?.clientHeight || 0;
+      const profile2 = node2.querySelector('.profile-section')?.clientHeight || 0;
+
+      const cambridge1 = node1.querySelector('.cambridge-section')?.clientHeight || 0;
+      const cambridge2 = node2.querySelector('.cambridge-section')?.clientHeight || 0;
+
+      const confronto1 = node1.querySelector('.confronto-section')?.clientHeight || 0;
+      const confronto2 = node2.querySelector('.confronto-section')?.clientHeight || 0;
+
+      setSectionHeights({
+        profile: Math.max(profile1, profile2),
+        cambridge: Math.max(cambridge1, cambridge2),
+        confronto: Math.max(confronto1, confronto2),
+      });
+
+    } else {
+      // Reset heights if not in 2-column view
+      setSectionHeights({ profile: 0, cambridge: 0, confronto: 0 });
+    }
+  }, [top.licei]);
 
   function nextFromAnswer(answerId: string) {
     const s = steps[indice];
@@ -154,12 +183,6 @@ export default function App() {
                   <div className="bg-white rounded-2xl p-6 md:p-8 text-left" style={{ color: BLU }}>
                     {top.licei.length > 0 ? (
                       <>
-                        <p className="text-sm opacity-80 mb-4 text-center" style={{ color: BLU }}>{buildExplanation()}</p>
-
-                        <h2 className="text-2xl md:text-3xl font-extrabold mb-4 text-center">
-                          {top.licei.length === 1 ? "Il percorso più adatto a te è:" : "I percorsi più adatti a te sono:"}
-                        </h2>
-
                         {top.licei.length !== 2 && (
                           <div className="space-y-8">
                             {top.licei.slice(0, 2).map((l) => (
@@ -178,13 +201,16 @@ export default function App() {
                         {top.licei.length === 2 && (
                           <>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              {top.licei.map((l) => (
-                                <ConfrontoOSAStatale
-                                  key={l.id}
-                                  liceo={l}
-                                  onApprofondisci={setDettaglioModale}
-                                  showApprofondimenti={false}
-                                />
+                              {top.licei.map((l, index) => (
+                                // FIX: The ref callback for a DOM element should not return a value. Changed from a concise body `() => value` to a block body `{}` to ensure it returns undefined.
+                                <div key={l.id} ref={el => { liceoRefs.current[index] = el; }}>
+                                  <ConfrontoOSAStatale
+                                    liceo={l}
+                                    onApprofondisci={setDettaglioModale}
+                                    showApprofondimenti={false}
+                                    sectionMinHeights={sectionHeights}
+                                  />
+                                </div>
                               ))}
                             </div>
                             <ApprofondimentiFooter onApprofondisci={setDettaglioModale} />
