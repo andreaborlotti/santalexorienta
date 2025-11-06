@@ -151,7 +151,7 @@ export default function App() {
           <div className="md:col-span-1">
             <AnimatePresence mode="wait">
               {step?.tipo === "intro" && (
-                <StepCard key={step.id} title={(step as IntroStep).titolo} subtitle={(step as IntroStep).testo}>
+                <StepCard key={step.id} title={(step as IntroStep).titolo} subtitle={(step as IntroStep).testo} showCambridgeLogo={indice <= 5}>
                   <div className="mt-6 flex items-center justify-center">
                     <button
                       onClick={() => setIndice(1)}
@@ -165,7 +165,7 @@ export default function App() {
               )}
 
               {step?.tipo === "scelta" && (
-                <StepCard key={step.id} title={(step as SceltaStep).titolo} subtitle={(step as SceltaStep).sottotitolo}>
+                <StepCard key={step.id} title={(step as SceltaStep).titolo} subtitle={(step as SceltaStep).sottotitolo} showCambridgeLogo={indice <= 5}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(step as SceltaStep).opzioni.map((o) => (
                       <TouchButton key={o.id} label={o.label} onClick={() => nextFromAnswer(o.id)} icon={o.icon} />
@@ -179,7 +179,7 @@ export default function App() {
               )}
 
               {step?.tipo === "output" && (
-                <StepCard key={step.id} title={(step as OutputStep).titolo}>
+                <StepCard key={step.id} title={(step as OutputStep).titolo} showCambridgeLogo={indice <= 5}>
                   <div className="bg-white rounded-2xl p-6 md:p-8 text-left" style={{ color: BLU }}>
                     {top.licei.length > 0 ? (
                       <>

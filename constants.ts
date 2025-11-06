@@ -6,6 +6,7 @@ import { parseCambridge } from './utils';
 
 // Theme
 export const LOGO_SRC = "https://licei.osabg.it/wp-content/uploads/2016/10/Logo_Licei_Opera_San_Alessandro.svg";
+export const CAMBRIDGE_LOGO_SRC = "https://i.postimg.cc/wxZH25YL/logo-cambridge.png";
 export const BLU = "#053f93";
 export const GIALLO = "#fbc200";
 export const GRIGIO = "#e0e7ff";
