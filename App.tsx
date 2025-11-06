@@ -1,7 +1,7 @@
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, RotateCcw, Sparkles, List } from "lucide-react";
+import { ChevronLeft, RotateCcw, Sparkles, List, Maximize, Minimize } from "lucide-react";
 
 import { StepCard } from "./components/StepCard";
 import { TouchButton } from "./components/TouchButton";
@@ -20,6 +20,43 @@ export default function App() {
   const [score, setScore] = useState<Score>(initialScore);
   const [dettaglioModale, setDettaglioModale] = useState<string | null>(null);
   const [showCatalog, setShowCatalog] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+
+  const toggleFullscreen = async () => {
+    if (!document.fullscreenElement) {
+      try {
+        await document.documentElement.requestFullscreen();
+      } catch (err) {
+        console.error(`Error attempting to enable full-screen mode: ${(err as Error).message} (${(err as Error).name})`);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        try {
+          await document.exitFullscreen();
+        } catch (err) {
+          console.error(`Error attempting to disable full-screen mode: ${(err as Error).message} (${(err as Error).name})`);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+    document.addEventListener('mozfullscreenchange', onFullscreenChange);
+    document.addEventListener('MSFullscreenChange', onFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', onFullscreenChange);
+      document.removeEventListener('mozfullscreenchange', onFullscreenChange);
+      document.removeEventListener('MSFullscreenChange', onFullscreenChange);
+    };
+  }, []);
 
   const steps: Step[] = useMemo(() => {
     return baseSteps.map((s) =>
@@ -35,7 +72,8 @@ export default function App() {
     const entries = Object.entries(score);
     if (entries.length === 0) return { topIds: [], licei: [] };
 
-    entries.sort((a, b) => b[1] - a[1]);
+    // FIX: Explicitly cast score values to numbers to prevent a TypeScript error during sorting.
+    entries.sort((a, b) => (b[1] as number) - (a[1] as number));
     const maxVal = entries[0][1];
     
     if (maxVal === 0) return { topIds: [], licei: [] };
@@ -71,7 +109,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full" style={{ background: BLU }}>
-      <div className="mx-auto py-6 md:py-10 px-4 md:px-8 max-w-4xl">
+      <div className="mx-auto py-6 md:py-10 px-4 md:px-8 max-w-4xl relative">
+        <button
+          onClick={toggleFullscreen}
+          className="absolute top-6 right-4 md:top-10 md:right-8 rounded-full p-2 hover:opacity-80 transition-opacity z-10"
+          style={{ background: GIALLO, color: BLU }}
+          aria-label={isFullscreen ? 'Esci dalla modalità schermo intero' : 'Attiva la modalità schermo intero'}
+        >
+          {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+        </button>
         <div className="md:grid md:grid-cols-1 md:gap-8">
           <div className="md:col-span-1">
             <AnimatePresence mode="wait">
