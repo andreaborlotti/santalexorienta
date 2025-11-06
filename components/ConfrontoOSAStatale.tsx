@@ -48,7 +48,18 @@ export const ConfrontoOSAStatale: React.FC<ConfrontoOSAStataleProps> = ({ liceo,
         <div className={`flex flex-wrap`}>
           {liceo.cambridgeMaterie && liceo.cambridgeMaterie.length > 0 ? (
             <p className={`font-bold ${isCompact ? 'text-sm' : 'text-base'}`} style={{ color: GIALLO }}>
-              {liceo.cambridgeMaterie.join(' · ')}
+              {liceo.cambridgeMaterie.map((m, i) => {
+                const isLast = i === liceo.cambridgeMaterie.length - 1;
+                if (m === 'English as a 2nd language') {
+                  return (
+                    <React.Fragment key={i}>
+                      <span>English as a 2<sup>nd</sup> language</span>
+                      {!isLast && ' · '}
+                    </React.Fragment>
+                  );
+                }
+                return <React.Fragment key={i}>{m}{!isLast && ' · '}</React.Fragment>;
+              })}
             </p>
           ) : (
             <p className={`font-bold ${isCompact ? 'text-sm' : 'text-base'} text-transparent select-none`}>-</p>

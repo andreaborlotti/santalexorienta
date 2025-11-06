@@ -19,8 +19,8 @@ export const approfondimenti: Approfondimenti = {
     contenuto: [
       "Frequentare alcune discipline scolastiche in lingua inglese.",
       "Utilizzare materiale didattico pubblicato dalla Cambridge University.",
-      "I docenti sono formati e certificati dalla Cambridge University.",
-      "Potrai sostenere gli esami IGCSE, gli stessi che i tuoi coetanei britannici superano a 16 anni.",
+      "Avvalersi della competenza di docenti formati e certificati dalla Cambridge University.",
+      "Poter sostenere gli esami IGCSE, gli stessi che i tuoi coetanei britannici superano a 16 anni.",
     ],
   },
   cattolica: {
@@ -29,23 +29,23 @@ export const approfondimenti: Approfondimenti = {
     icon: React.createElement(School, { size: 24 }),
     contenuto: [
       "I nostri valori si ispirano all'umanesimo cristiano.",
-      "La scuola si propone di coltivare tutte le tue dimensioni, non solo quelle culturali ma anche quelle emotive, sociali e spirituali.",
-      "Ci proponiamo di aiutarti a diventare una persona libera, responsabile, capace di contribuire alla costruzione di un futuro più giusto e fraterno per tutti.",
+      "Ci proponiamo di coltivare tutte le tue dimensioni, non solo quelle culturali ma anche quelle emotive, sociali e spirituali.",
+      "Ci impegniamo per aiutarti a diventare una persona libera, responsabile, capace di contribuire alla costruzione di un futuro più giusto e fraterno per tutti.",
       "Siamo aperti a famiglie di ogni religione anche a non credenti.",
     ],
   },
   paritaria: {
-    titolo: "Scuola paritaria: cosa significa la parità scolastica",
+    titolo: "Scuola paritaria: Cosa significa la parità scolastica",
     // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
     icon: React.createElement(Info, { size: 24 }),
     contenuto: [
-      "Ottieni un titolo di studio della scuola statale.",
-      "Hai a disposizione insegnanti accuratamente selezionati e formati dalla scuola.",
-      "L’iscrizione comporta il pagamento di una retta ma il Sant’Alessandro mette a disposizione delle borse di studio per i meritevoli con difficoltà economiche.",
+      "Ottenere il medesimo titolo di studio della scuola statale.",
+      "Avere a disposizione insegnanti accuratamente selezionati e formati dalla scuola.",
+      "Provvedere al pagamento di una retta. Ma il Sant’Alessandro mette a disposizione delle borse di studio per i meritevoli con difficoltà economiche.",
     ],
   },
   benessere: {
-    titolo: "Benessere a scuola: Come è impostata l’organizzazione della scuola per farmi stare bene?",
+    titolo: "Benessere a scuola: Come è impostata l’organizzazione della scuola per farti stare bene",
     // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
     icon: React.createElement(Sparkles, { size: 24 }),
     contenuto: [
@@ -68,20 +68,20 @@ export const approfondimenti: Approfondimenti = {
 
 // Licei Data
 export const catalogoLicei: Liceo[] = [
-  { id: "classico-int", nome: "Liceo Classico Internazionale", profilo: "Per chi ama le materie umanistiche, la cultura e le lingue classiche", cambridgeMaterie: parseCambridge("geography, biology e english as a second language") },
-  { id: "scientifico-int", nome: "Liceo Scientifico Internazionale", profilo: "Per chi ha attitudine ad un approccio logico-matematico, sperimentale tipico dell'indagine scientifica.", cambridgeMaterie: parseCambridge("geography, biology, business studies, Maths, Physics, Art & Design, english as a second language") },
-  { id: "linguistico-moderno", nome: "Liceo Linguistico Moderno", profilo: "Per chi ama le lingue straniere, la storia dell'arte e le materie umanistiche", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a second language") },
-  { id: "linguistico-giuridico", nome: "Liceo Linguistico Giuridico Economico", profilo: "Per chi vuole unire all'approccio linguistico quello economico aziendale", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a second language") },
+  { id: "classico-int", nome: "Liceo Classico Internazionale", profilo: "Per chi ama le materie umanistiche, la cultura e le lingue classiche", cambridgeMaterie: parseCambridge("geography, biology e english as a 2nd language") },
+  { id: "scientifico-int", nome: "Liceo Scientifico Internazionale", profilo: "Per chi ha attitudine ad un approccio logico-matematico, sperimentale tipico dell'indagine scientifica.", cambridgeMaterie: parseCambridge("geography, biology, business studies, Maths, Physics, Art & Design, english as a 2nd language") },
+  { id: "linguistico-moderno", nome: "Liceo Linguistico Moderno", profilo: "Per chi ama le lingue straniere, la storia dell'arte e le materie umanistiche", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a 2nd language") },
+  { id: "linguistico-giuridico", nome: "Liceo Linguistico Giuridico Economico", profilo: "Per chi vuole unire all'approccio linguistico quello economico aziendale", cambridgeMaterie: parseCambridge("geography, travel and tourism e english as a 2nd language") },
   { id: "scienze-umane-es", nome: "Liceo delle Scienze Umane opzione economico-sociale", profilo: "Per chi vuole indagare la realtà sociale sia con le categorie della psicologia, sociologia e pedagogia, sia con le scienze economico giuridiche", cambridgeMaterie: parseCambridge("geography") },
 ];
 
 // Comparison Data
 export const confrontoById: Record<string, Confronto> = {
-  "classico-int": { righe: ["+ 2 ore a settimana al biennio e 1 al triennio di business studies", "+ 1 ora a settimana al biennio di laboratorio fisica/chimica aggiuntive", "Metodo didattico Cambridge basato su team work e problem solving", "Attività di traduzione in classe con insegnante come tutor"] },
-  "scientifico-int": { righe: ["+ 2 ore a settimana al biennio e 1 al triennio di business studies", "+ 1 ora a settimana laboratorio fisica/chimica aggiuntive", "Metodo didattico Cambridge basato su team work e problem solving"] },
-  "linguistico-moderno": { righe: ["+ 230/anno ore di inglese", "Storia dell'arte sia al biennio che al triennio"] },
-  "linguistico-giuridico": { righe: ["+ 165 ore /anno di inglese", "latino per 5 anni invece che 2", "solo inglese + seconda lingua europea a scelta rispetto alle 3 straniere", "+ 4/5 ore settimanali di materie in ambito giuridico economico", "+1 ora settimanale di matematica"] },
-  "scienze-umane-es": { righe: ["+627 ore di lingua aggiuntive", "+1 ora a settimana di inglese al biennio", "+2 ore a settimana di psicologia al biennio", "Approccio laboratoriale, ogni anno un laboratorio con tema differente"] },
+  "classico-int": { righe: ["+ 2 ore a settimana al biennio e 1 al triennio di business studies", "+ 1 ora a settimana al biennio di laboratorio fisica/chimica", "Metodo didattico Cambridge basato su team work e problem solving", "Attività di traduzione in classe con insegnante tutor"] },
+  "scientifico-int": { righe: ["+ 2 ore a settimana al biennio e 1 al triennio di business studies", "+ 1 ora a settimana laboratorio fisica/chimica", "Metodo didattico Cambridge basato su team work e problem solving"] },
+  "linguistico-moderno": { righe: ["+ 230 ore/anno di inglese", "Storia dell'arte sia al biennio che al triennio"] },
+  "linguistico-giuridico": { righe: ["+ 165 ore/anno di inglese", "latino per 5 anni invece che al biennio", "2 lingue straniere (inglese + 1 lingua comunitaria a scelta) invece di 3", "+ 4/5 ore settimanali di materie in ambito giuridico economico", "+ 1 ora settimanale di matematica"] },
+  "scienze-umane-es": { righe: ["+ 627 ore/anno di lingua straniera", "+ 1 ora a settimana di inglese al biennio", "+ 2 ore a settimana di psicologia al biennio", "Approccio laboratoriale, ogni anno un laboratorio con tema differente"] },
 };
 
 // Labels for UI
