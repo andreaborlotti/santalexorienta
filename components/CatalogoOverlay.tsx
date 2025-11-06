@@ -1,0 +1,80 @@
+
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft } from 'lucide-react';
+import { Liceo } from '../types';
+import { BLU, GIALLO, GRIGIO, approfondimenti } from '../constants';
+import { ConfrontoOSAStatale } from './ConfrontoOSAStatale';
+
+interface CatalogoOverlayProps {
+  show: boolean;
+  onClose: () => void;
+  licei: Liceo[];
+  onApprofondisci: (key: string) => void;
+}
+
+export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose, licei, onApprofondisci }) => {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 p-6 md:p-10 overflow-y-auto"
+          style={{ background: GRIGIO }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 max-w-7xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-extrabold" style={{ color: BLU }}>
+                Tutti gli indirizzi liceali
+              </h2>
+              <button
+                onClick={onClose}
+                className="rounded-xl px-6 py-3 text-lg font-bold active:scale-[0.98] transition-transform duration-100 flex items-center gap-2 mt-4 md:mt-0"
+                style={{ background: GIALLO, color: BLU }}
+              >
+                <ChevronLeft className="inline" /> Torna al tuo liceo
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
+              {licei.map((l) => (
+                <ConfrontoOSAStatale
+                  key={l.id}
+                  liceo={l}
+                  onApprofondisci={onApprofondisci}
+                  showApprofondimenti={false}
+                  isCompact={true}
+                />
+              ))}
+            </div>
+
+            <div className="mt-8 pt-6 border-t max-w-7xl mx-auto" style={{ borderColor: BLU + '40' }}>
+              <h4 className="text-xl font-bold mb-4 text-center" style={{ color: BLU }}>
+                Approfondisci i caratteri distintivi di tutti i Licei dell'Opera Sant'Alessandro
+              </h4>
+              <div className="flex flex-wrap justify-center gap-2">
+                {Object.entries(approfondimenti).map(([key, item]) => (
+                  <button
+                    key={key}
+                    onClick={() => onApprofondisci(key)}
+                    className="flex-1 min-w-[150px] md:min-w-0 md:flex-none rounded-xl px-4 py-3 text-sm md:text-base font-bold shadow-md active:scale-[0.98] transition-transform duration-100 flex items-center justify-center gap-2"
+                    style={{ background: BLU, color: GIALLO }}
+                  >
+                    {item.icon}
+                    {item.titolo.split(':')[0]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
