@@ -68,7 +68,7 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 mx-auto" style={{ maxWidth: '1300px' }}>
               <h2 className="text-3xl md:text-4xl font-extrabold" style={{ color: BLU }}>
                 Tutti gli indirizzi liceali
               </h2>
@@ -81,7 +81,7 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 mx-auto" style={{ maxWidth: '1300px' }}>
               {licei.map((l, index) => (
                 <div key={l.id} ref={el => { cardRefs.current[index] = el; }}>
                   <ConfrontoOSAStatale
@@ -95,7 +95,7 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t max-w-7xl mx-auto" style={{ borderColor: BLU + '40' }}>
+            <div className="mt-8 pt-6 border-t mx-auto" style={{ borderColor: BLU + '40', maxWidth: '1300px' }}>
               <h4 className="text-xl font-bold mb-4 text-center" style={{ color: BLU }}>
                 Approfondisci i caratteri distintivi di tutti i Licei dell'Opera Sant'Alessandro
               </h4>
