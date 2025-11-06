@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import { Liceo } from '../types';
@@ -14,6 +13,46 @@ interface CatalogoOverlayProps {
 }
 
 export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose, licei, onApprofondisci }) => {
+  const [sectionMinHeights, setSectionMinHeights] = useState({ profile: 0, cambridge: 0, confronto: 0 });
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useLayoutEffect(() => {
+    if (show && licei.length > 0) {
+      // Use a timeout to ensure the DOM has been painted and is ready for measurement.
+      const timer = setTimeout(() => {
+        const heights = {
+          profile: 0,
+          cambridge: 0,
+          confronto: 0,
+        };
+
+        cardRefs.current.forEach(cardNode => {
+          if (cardNode) {
+            const profileEl = cardNode.querySelector('.profile-section');
+            const cambridgeEl = cardNode.querySelector('.cambridge-section');
+            const confrontoEl = cardNode.querySelector('.confronto-section');
+            
+            if (profileEl) heights.profile = Math.max(heights.profile, profileEl.clientHeight);
+            if (cambridgeEl) heights.cambridge = Math.max(heights.cambridge, cambridgeEl.clientHeight);
+            if (confrontoEl) heights.confronto = Math.max(heights.confronto, confrontoEl.clientHeight);
+          }
+        });
+        
+        // Only update state if the calculated heights are different.
+        if (
+          heights.profile > 0 &&
+          (heights.profile !== sectionMinHeights.profile ||
+          heights.cambridge !== sectionMinHeights.cambridge ||
+          heights.confronto !== sectionMinHeights.confronto)
+        ) {
+          setSectionMinHeights(heights);
+        }
+      }, 100); // 100ms delay to allow for rendering and transitions.
+
+      return () => clearTimeout(timer);
+    }
+  }, [show, licei, sectionMinHeights]);
+
   return (
     <AnimatePresence>
       {show && (
@@ -42,15 +81,17 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
-              {licei.map((l) => (
-                <ConfrontoOSAStatale
-                  key={l.id}
-                  liceo={l}
-                  onApprofondisci={onApprofondisci}
-                  showApprofondimenti={false}
-                  isCompact={true}
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
+              {licei.map((l, index) => (
+                <div key={l.id} ref={el => { cardRefs.current[index] = el; }}>
+                  <ConfrontoOSAStatale
+                    liceo={l}
+                    onApprofondisci={onApprofondisci}
+                    showApprofondimenti={false}
+                    isCompact={true}
+                    sectionMinHeights={sectionMinHeights}
+                  />
+                </div>
               ))}
             </div>
 

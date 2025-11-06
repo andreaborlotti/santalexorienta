@@ -10,6 +10,19 @@ interface ConfrontoOSAStataleProps {
   sectionMinHeights?: { profile: number; cambridge: number; confronto: number; };
 }
 
+const formatLiceoName = (name: string): React.ReactNode => {
+  if (name === "Liceo Classico Internazionale") {
+    return <>Liceo Classico<br />Internazionale</>;
+  }
+  if (name === "Liceo Linguistico Moderno") {
+    return <>Liceo Linguistico<br />Moderno</>;
+  }
+  if (name === "Liceo Linguistico Giuridico Economico") {
+    return <>Liceo Linguistico<br />Giuridico Economico</>;
+  }
+  return name;
+};
+
 export const ConfrontoOSAStatale: React.FC<ConfrontoOSAStataleProps> = ({ liceo, showApprofondimenti = true, isCompact = false, sectionMinHeights }) => {
   const dati = confrontoById[liceo.id];
   if (!dati) return null;
@@ -23,7 +36,7 @@ export const ConfrontoOSAStatale: React.FC<ConfrontoOSAStataleProps> = ({ liceo,
         className={`profile-section border-b ${isCompact ? 'pb-3' : 'pb-4'}`}
         style={{ borderColor: GIALLO, minHeight: sectionMinHeights?.profile || 'auto' }}
       >
-        <h3 className={`font-extrabold mb-2 text-center ${isCompact ? 'text-lg' : 'text-2xl md:text-3xl'}`}>{liceo.nome}</h3>
+        <h3 className={`font-extrabold mb-2 text-center ${isCompact ? 'text-lg' : 'text-2xl md:text-3xl'}`}>{formatLiceoName(liceo.nome)}</h3>
         <p className={`text-center font-medium ${isCompact ? 'text-sm' : 'text-base md:text-lg'}`}>{liceo.profilo}</p>
       </div>
 
