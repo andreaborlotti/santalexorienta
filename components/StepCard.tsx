@@ -15,7 +15,6 @@ export const StepCard: React.FC<StepCardProps> = ({ children, title, subtitle })
         <div className="flex items-center gap-3 mb-4">
           <img src={LOGO_SRC} alt="Logo Licei OSA" className="w-10 h-10 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
           <h1 className="text-2xl md:text-4xl font-bold tracking-tight">{title}</h1>
-          <img src="/logo-personale.png" alt="Logo personalizzato" className="ml-auto h-[35px] w-auto" />
         </div>
         {subtitle && <p className="opacity-90 mb-4 text-base md:text-lg">{subtitle}</p>}
         {children}
