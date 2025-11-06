@@ -161,6 +161,9 @@ export default function App() {
                       <Sparkles className="inline mr-2" /> {(step as IntroStep).azione}
                     </button>
                   </div>
+                  <div className="mt-6 text-center text-sm text-white opacity-80">
+                    Licei Opera Sant'Alessandro – imparare a stare al mondo
+                  </div>
                 </StepCard>
               )}
 
@@ -173,6 +176,7 @@ export default function App() {
                   </div>
                   <div className="mt-6 flex items-center justify-between">
                     <button onClick={() => setIndice((i) => Math.max(0, i - 1))} className="flex items-center gap-2 text-white underline hover:opacity-80 transition-opacity"><ChevronLeft /> Indietro</button>
+                    <span className="text-sm text-white opacity-80 hidden md:inline">Licei Opera Sant'Alessandro – imparare a stare al mondo</span>
                     <span className="text-sm opacity-80">Passo {indice} di {steps.length - 2}</span>
                   </div>
                 </StepCard>
