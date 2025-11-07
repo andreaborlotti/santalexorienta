@@ -96,7 +96,7 @@ export const labels: Labels = {
 
 // Quiz Steps
 export const baseSteps: Step[] = [
-  { id: "benvenuto", tipo: "intro", titolo: "Ciao, sono Santalex", testo: "Sono la tua guida in questo viaggio virtuale per aiutarti ad individuare il liceo più adatto a te. Sei pronto?", azione: "Andiamo!", sidebarLabel: "Benvenuto" },
+  { id: "benvenuto", tipo: "intro", titolo: "Ciao, sono Santalex", testo: "Sono la tua guida in questo viaggio virtuale per aiutarti ad individuare il liceo più adatto a te. Pronti a iniziare?", azione: "Andiamo!", sidebarLabel: "Benvenuto" },
   {
     id: "scenario1", tipo: "scelta", titolo: "In classe", sottotitolo: "La prof propone un’attività: quale preferisci?",
     opzioni: [
