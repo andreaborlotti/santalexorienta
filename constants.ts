@@ -87,44 +87,101 @@ export const confrontoById: Record<string, Confronto> = {
 
 // Labels for UI
 export const labels: Labels = {
-  lab_scienze: "Esperimento di scienze", lettura_classici: "Lettura di classici e discussione", roleplay_lingue: "Gioco di ruolo in lingua", caso_impresa: "Caso di impresa (costi/ricavi)",
-  report_fisica: "Report di fisica con grafici", tema_storico: "Tema storico e idee", presentazione_lingue: "Presentazione in lingua su una città", analisi_diritto: "Analisi di attualità: diritto/economia",
-  museo_scienza: "Museo della scienza con laboratori", scavi_archeo: "Scavi archeologici e iscrizioni", tour_multilingue: "Tour multilingue con guida", visita_tribunale: "Visita in Tribunale",
-  problem_solver: "Problem solver (calcoli/verifiche)", ricercatore_fonti: "Ricercatore fonti e timeline", mediatore_lingue: "Mediatore/traduttore in lingue", coordinatore_impresa: "Coordinatore (budget/regole)",
-  lab_ricerca: "Laboratorio/Ospedale", biblioteca: "Scuola/editoria", relazioni_internaz: "Relazioni Internazionali", impresa_pubblica: "Impresa/Pubblica Amministrazione",
+  // Step 1
+  s1_o1: "Cerco di capire i numeri e la logica che ci stanno dietro.",
+  s1_o2: "Chiedo consiglio agli amici o guardo cosa fanno gli altri per capire perché giocano così.",
+  s1_o3: "Leggo bene le regole. Cerco il modo migliore e più furbo per vincere.",
+  s1_o4: "Mi interessa la 'storia' del gioco e da dove viene.",
+  // Step 2
+  s2_o1: "Faccio uno schema preciso, con i 'perché' e le 'conseguenze', punto per punto.",
+  s2_o2: "Uso un sacco di esempi e provo a 'tradurre' l'idea con parole diverse.",
+  s2_o3: "Prima di tutto cerco di capire lui: cosa non ha capito? Come si sente? Poi spiego.",
+  s2_o4: "Vado dritto al sodo e gli spiego in modo chiaro perché questa cosa è utile.",
+  // Step 3
+  s3_o1: "La storia di un vaso antico o di un fossile, e cosa ci racconta su chi c'era prima di noi.",
+  s3_o2: "Il pannello interattivo dove puoi premere bottoni e capire come funziona un esperimento.",
+  s3_o3: "Capire come fa il museo a funzionare: chi ci lavora, quanto costa il biglietto, come attira la gente.",
+  s3_o4: "Guardare le altre persone: come si comportano, cosa guardano, se si emozionano.",
+  // Step 4
+  s4_o1: "Una gara di scienze o informatica: 24 ore per trovare una soluzione a un problema.",
+  s4_o2: "Recitare in uno spettacolo teatrale antico o organizzare una mostra sulla storia.",
+  s4_o3: "Un gioco di simulazione: devi creare un'azienda e battere la concorrenza.",
+  s4_o4: "Un progetto di volontariato per aiutare gli altri, o un'indagine per capire come la pensa la gente.",
+  // Step 5
+  s5_o1: "Più ore in laboratorio di scienze, per fare esperimenti e 'sporcarsi le mani'.",
+  s5_o2: "Un corso per imparare a tradurre film e serie TV, o per scrivere storie in un'altra lingua.",
+  s5_o3: "Un corso per capire come funzionano i soldi, le aziende o le leggi.",
+  s5_o4: "Un incontro per parlare di psicologia e capire meglio come 'funzionano' le persone.",
+  // Step 6
+  s6_o1: "Studiare materie 'normali' (come geografia) ma in inglese, come fanno i ragazzi inglesi.",
+  s6_o2: "Imparare a parlare tante lingue diverse (francese, spagnolo, tedesco) e saperle usare bene.",
+  s6_o3: "Capire come funzionano le aziende e le leggi in Europa e nel mondo.",
+  s6_o4: "Capire come gli altri Paesi aiutano le persone in difficoltà (la sanità, la scuola, il sociale).",
+  // Step 7
+  s7_o1: "Lavorare in un laboratorio, fare l'ingegnere o il medico.",
+  s7_o2: "Lavorare nel mondo della cultura: scrivere libri, lavorare in un museo o fare il giornalista.",
+  s7_o3: "Avere un'azienda tutta mia, lavorare in banca o nel marketing.",
+  s7_o4: "Lavorare per aiutare gli altri: nel sociale, come psicologo o in giro per il mondo per aiutare chi ha bisogno.",
 };
 
 // Quiz Steps
 export const baseSteps: Step[] = [
   { id: "benvenuto", tipo: "intro", titolo: "Ciao, sono Santalex", testo: "Sono la tua guida in questo viaggio virtuale per aiutarti ad individuare il liceo più adatto a te. Pronti a iniziare?", azione: "Andiamo!", sidebarLabel: "Benvenuto" },
   {
-    id: "scenario1", tipo: "scelta", titolo: "In classe", sottotitolo: "La prof propone un’attività: quale preferisci?",
+    id: "step1", tipo: "scelta", titolo: "Immagina di iniziare un videogioco di strategia che non conosci.", sottotitolo: "Qual è la tua prima mossa?",
     opzioni: [
-      // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
-      { id: "lab_scienze", label: labels.lab_scienze, icon: React.createElement(Beaker, { size: 24 }) }, { id: "lettura_classici", label: labels.lettura_classici, icon: React.createElement(BookOpen, { size: 24 }) },
-      { id: "roleplay_lingue", label: labels.roleplay_lingue, icon: React.createElement(Globe, { size: 24 }) }, { id: "caso_impresa", label: labels.caso_impresa, icon: React.createElement(IconScales, { size: 24 }) },
+      { id: "s1_o1", label: labels.s1_o1 }, { id: "s1_o2", label: labels.s1_o2 },
+      { id: "s1_o3", label: labels.s1_o3 }, { id: "s1_o4", label: labels.s1_o4 },
     ],
-    sidebarLabel: "Attività in classe",
+    sidebarLabel: "Step 1",
   },
   {
-    id: "scenario2", tipo: "scelta", titolo: "Compito a casa", sottotitolo: "Devi preparare un elaborato, quale traccia scegli?",
-    opzioni: [{ id: "report_fisica", label: labels.report_fisica }, { id: "tema_storico", label: labels.tema_storico }, { id: "presentazione_lingue", label: labels.presentazione_lingue }, { id: "analisi_diritto", label: labels.analisi_diritto }],
-    sidebarLabel: "Compito a casa",
+    id: "step2", tipo: "scelta", titolo: "Devi spiegare a un amico una cosa difficile che tu hai capito e lui no.", sottotitolo: "Cosa fai?",
+    opzioni: [
+      { id: "s2_o1", label: labels.s2_o1 }, { id: "s2_o2", label: labels.s2_o2 },
+      { id: "s2_o3", label: labels.s2_o3 }, { id: "s2_o4", label: labels.s2_o4 },
+    ],
+    sidebarLabel: "Step 2",
   },
   {
-    id: "scenario3", tipo: "scelta", titolo: "Gita scolastica", sottotitolo: "Scegli l’attività principale che ti interessa di più",
-    opzioni: [{ id: "museo_scienza", label: labels.museo_scienza }, { id: "scavi_archeo", label: labels.scavi_archeo }, { id: "tour_multilingue", label: labels.tour_multilingue }, { id: "visita_tribunale", label: labels.visita_tribunale }],
-    sidebarLabel: "Gita scolastica",
+    id: "step3", tipo: "scelta", titolo: "Sei in un museo che non hai mai visto.", sottotitolo: "Cosa attira la tua curiosità?",
+    opzioni: [
+      { id: "s3_o1", label: labels.s3_o1 }, { id: "s3_o2", label: labels.s3_o2 },
+      { id: "s3_o3", label: labels.s3_o3 }, { id: "s3_o4", label: labels.s3_o4 },
+    ],
+    sidebarLabel: "Step 3",
   },
   {
-    id: "scenario4", tipo: "scelta", titolo: "Progetto di gruppo", sottotitolo: "Che ruolo scegli?",
-    opzioni: [{ id: "problem_solver", label: labels.problem_solver }, { id: "ricercatore_fonti", label: labels.ricercatore_fonti }, { id: "mediatore_lingue", label: labels.mediatore_lingue }, { id: "coordinatore_impresa", label: labels.coordinatore_impresa }],
-    sidebarLabel: "Progetto di gruppo",
+    id: "step4", tipo: "scelta", titolo: "La scuola propone un progetto speciale.", sottotitolo: "Quale ti attira di più?",
+    opzioni: [
+      { id: "s4_o1", label: labels.s4_o1 }, { id: "s4_o2", label: labels.s4_o2 },
+      { id: "s4_o3", label: labels.s4_o3 }, { id: "s4_o4", label: labels.s4_o4 },
+    ],
+    sidebarLabel: "Step 4",
   },
   {
-    id: "scenario5", tipo: "scelta", titolo: "Futuro", sottotitolo: "Dove ti immagini da grande",
-    opzioni: [{ id: "lab_ricerca", label: labels.lab_ricerca }, { id: "biblioteca", label: labels.biblioteca }, { id: "relazioni_internaz", label: labels.relazioni_internaz }, { id: "impresa_pubblica", label: labels.impresa_pubblica }],
-    sidebarLabel: "Visione futura",
+    id: "step5", tipo: "scelta", titolo: "Puoi scegliere un'ora in più alla settimana.", sottotitolo: "Quale corso extra faresti?",
+    opzioni: [
+      { id: "s5_o1", label: labels.s5_o1 }, { id: "s5_o2", label: labels.s5_o2 },
+      { id: "s5_o3", label: labels.s5_o3 }, { id: "s5_o4", label: labels.s5_o4 },
+    ],
+    sidebarLabel: "Step 5",
+  },
+  {
+    id: "step6", tipo: "scelta", titolo: "In questi licei si usa molto l'inglese e si guardano gli altri Paesi.", sottotitolo: "Qual è la cosa che ti piace di più?",
+    opzioni: [
+      { id: "s6_o1", label: labels.s6_o1 }, { id: "s6_o2", label: labels.s6_o2 },
+      { id: "s6_o3", label: labels.s6_o3 }, { id: "s6_o4", label: labels.s6_o4 },
+    ],
+    sidebarLabel: "Step 6",
+  },
+  {
+    id: "step7", tipo: "scelta", titolo: "Pensa a quando sarai grande.", sottotitolo: "Quale lavoro ti attira di più?",
+    opzioni: [
+      { id: "s7_o1", label: labels.s7_o1 }, { id: "s7_o2", label: labels.s7_o2 },
+      { id: "s7_o3", label: labels.s7_o3 }, { id: "s7_o4", label: labels.s7_o4 },
+    ],
+    sidebarLabel: "Step 7",
   },
   { id: "risultato", tipo: "output", titolo: "Il percorso più adatto a te è:", sidebarLabel: "Risultato" },
 ];
@@ -133,9 +190,39 @@ export const baseSteps: Step[] = [
 export const initialScore: Score = { "classico-int": 0, "scientifico-int": 0, "linguistico-moderno": 0, "linguistico-giuridico": 0, "scienze-umane-es": 0 };
 
 export const boosts: Boosts = {
-  lab_scienze: { "scientifico-int": 3 }, lettura_classici: { "classico-int": 3 }, roleplay_lingue: { "linguistico-moderno": 3 }, caso_impresa: { "linguistico-giuridico": 2, "scienze-umane-es": 2 },
-  report_fisica: { "scientifico-int": 3 }, tema_storico: { "classico-int": 3 }, presentazione_lingue: { "linguistico-moderno": 3, "linguistico-giuridico": 1 }, analisi_diritto: { "linguistico-giuridico": 3, "scienze-umane-es": 2 },
-  museo_scienza: { "scientifico-int": 2 }, scavi_archeo: { "classico-int": 2 }, tour_multilingue: { "linguistico-moderno": 2 }, visita_tribunale: { "linguistico-giuridico": 2, "scienze-umane-es": 2 },
-  problem_solver: { "scientifico-int": 2 }, ricercatore_fonti: { "classico-int": 2 }, mediatore_lingue: { "linguistico-moderno": 2 }, coordinatore_impresa: { "linguistico-giuridico": 2, "scienze-umane-es": 1 },
-  lab_ricerca: { "scientifico-int": 3 }, biblioteca: { "classico-int": 3 }, relazioni_internaz: { "linguistico-moderno": 3 }, impresa_pubblica: { "linguistico-giuridico": 2, "scienze-umane-es": 2 },
+  // Step 1
+  s1_o1: { "scientifico-int": 3, "linguistico-giuridico": 1 },
+  s1_o2: { "classico-int": 1, "linguistico-moderno": 1, "scienze-umane-es": 3 },
+  s1_o3: { "scientifico-int": 1, "linguistico-giuridico": 3 },
+  s1_o4: { "classico-int": 3, "linguistico-moderno": 1, "scienze-umane-es": 1 },
+  // Step 2
+  s2_o1: { "classico-int": 2, "scientifico-int": 3 },
+  s2_o2: { "classico-int": 1, "linguistico-moderno": 3, "linguistico-giuridico": 1, "scienze-umane-es": 1 },
+  s2_o3: { "linguistico-moderno": 1, "scienze-umane-es": 3 },
+  s2_o4: { "linguistico-moderno": 1, "linguistico-giuridico": 3 },
+  // Step 3
+  s3_o1: { "classico-int": 3, "linguistico-moderno": 1, "scienze-umane-es": 1 },
+  s3_o2: { "scientifico-int": 3, "linguistico-giuridico": 1 },
+  s3_o3: { "linguistico-giuridico": 3, "scienze-umane-es": 1 },
+  s3_o4: { "linguistico-moderno": 1, "scienze-umane-es": 3 },
+  // Step 4
+  s4_o1: { "scientifico-int": 4 },
+  s4_o2: { "classico-int": 4, "linguistico-moderno": 1 },
+  s4_o3: { "linguistico-moderno": 1, "linguistico-giuridico": 4 },
+  s4_o4: { "linguistico-moderno": 1, "scienze-umane-es": 4 },
+  // Step 5
+  s5_o1: { "classico-int": 1, "scientifico-int": 4 },
+  s5_o2: { "linguistico-moderno": 4, "linguistico-giuridico": 1 },
+  s5_o3: { "classico-int": 1, "linguistico-giuridico": 4 },
+  s5_o4: { "scienze-umane-es": 4 },
+  // Step 6
+  s6_o1: { "classico-int": 2, "scientifico-int": 2, "linguistico-giuridico": 1, "scienze-umane-es": 2 },
+  s6_o2: { "linguistico-moderno": 4, "linguistico-giuridico": 1 },
+  s6_o3: { "linguistico-moderno": 1, "linguistico-giuridico": 4 },
+  s6_o4: { "linguistico-giuridico": 1, "scienze-umane-es": 4 },
+  // Step 7
+  s7_o1: { "scientifico-int": 4 },
+  s7_o2: { "classico-int": 4, "linguistico-moderno": 1 },
+  s7_o3: { "linguistico-moderno": 1, "linguistico-giuridico": 4 },
+  s7_o4: { "linguistico-moderno": 1, "scienze-umane-es": 4 },
 };

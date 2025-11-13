@@ -13,6 +13,8 @@ import { baseSteps, initialScore, labels, catalogoLicei, BLU, GIALLO } from './c
 import { Answers, IntroStep, Liceo, OutputStep, SceltaStep, Score, Step } from './types';
 import { applyBoost, shuffleArray } from './utils';
 
+const NEAR_MISS_DELTA = 2; // Mostra il secondo classificato se è entro questo scarto di punti
+
 export default function App() {
   const [indice, setIndice] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -20,6 +22,7 @@ export default function App() {
   const [dettaglioModale, setDettaglioModale] = useState<string | null>(null);
   const [showCatalog, setShowCatalog] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+  const [quizKey, setQuizKey] = useState(0);
 
   // State and Refs for dynamic height synchronization
   const [sectionHeights, setSectionHeights] = useState({ profile: 0, cambridge: 0, confronto: 0 });
@@ -67,7 +70,7 @@ export default function App() {
         ? { ...s, opzioni: shuffleArray(s.opzioni) }
         : s
     );
-  }, []);
+  }, [quizKey]);
 
   const step = steps[indice];
 
@@ -75,16 +78,29 @@ export default function App() {
     const entries = Object.entries(score);
     if (entries.length === 0) return { topIds: [], licei: [] };
 
-    // FIX: Explicitly cast score values to numbers to prevent a TypeScript error during sorting.
     entries.sort((a, b) => (b[1] as number) - (a[1] as number));
-    const maxVal = entries[0][1];
     
+    const maxVal = entries[0][1];
     if (maxVal === 0) return { topIds: [], licei: [] };
 
-    const topIds = entries.filter(([, v]) => v === maxVal).map(([k]) => k);
-    const licei = topIds.map((id) => catalogoLicei.find((l) => l.id === id)).filter((l): l is Liceo => l !== undefined);
+    // Gestisce il pareggio: prende tutti i licei con il punteggio massimo
+    let topEntries = entries.filter(([, v]) => v === maxVal);
+
+    // Se c'è un solo vincitore, controlla se il secondo è molto vicino
+    if (topEntries.length === 1 && entries.length > 1) {
+      const winnerScore = topEntries[0][1];
+      const secondPlace = entries[1];
+      const secondPlaceScore = secondPlace[1];
+      
+      if (winnerScore - secondPlaceScore <= NEAR_MISS_DELTA) {
+        topEntries.push(secondPlace);
+      }
+    }
+
+    const topIds = topEntries.map(([k]) => k);
+    const liceiResult = topIds.map((id) => catalogoLicei.find((l) => l.id === id)).filter((l): l is Liceo => l !== undefined);
     
-    return { topIds, licei };
+    return { topIds, licei: liceiResult };
   }, [score]);
 
   useLayoutEffect(() => {
@@ -127,6 +143,7 @@ export default function App() {
     setScore(initialScore);
     setDettaglioModale(null);
     setShowCatalog(false);
+    setQuizKey(prev => prev + 1);
   }
 
   function buildExplanation(): string | null {
@@ -189,7 +206,7 @@ export default function App() {
                       <>
                         {top.licei.length !== 2 && (
                           <div className="space-y-8">
-                            {top.licei.slice(0, 2).map((l) => (
+                            {top.licei.map((l) => (
                                 <div key={l.id} className="flex flex-col">
                                     <ConfrontoOSAStatale
                                         liceo={l}
@@ -206,7 +223,6 @@ export default function App() {
                           <>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               {top.licei.map((l, index) => (
-                                // FIX: The ref callback for a DOM element should not return a value. Changed from a concise body `() => value` to a block body `{}` to ensure it returns undefined.
                                 <div key={l.id} ref={el => { liceoRefs.current[index] = el; }}>
                                   <ConfrontoOSAStatale
                                     liceo={l}
