@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Beaker, BookOpen, Globe, Compass, Info, School, Sparkles } from 'lucide-react';
+import { Beaker, BookOpen, Globe, Compass, Info, School, Sparkles, GraduationCap } from 'lucide-react';
 import { Approfondimenti, Boosts, Confronto, Labels, Liceo, Score, Step } from './types';
 import { IconScales } from './components/IconScales';
 import { parseCambridge } from './utils';
@@ -42,18 +43,28 @@ export const approfondimenti: Approfondimenti = {
     contenuto: [
       "Ottenere il medesimo titolo di studio della scuola statale.",
       "Avere a disposizione insegnanti accuratamente selezionati e formati dalla scuola.",
-      "Provvedere al pagamento di una retta. Ma il Sant’Alessandro mette a disposizione delle borse di studio per i meritevoli con difficoltà economiche.",
+      "Provvedere al pagamento di una retta. Ma il Sant'Alessandro mette a disposizione delle borse di studio per i meritevoli con difficoltà economiche.",
+    ],
+  },
+  borse: {
+    titolo: "Borse di studio: Borse di studio – Diamo futuro al talento",
+    // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
+    icon: React.createElement(GraduationCap, { size: 24 }),
+    contenuto: [
+      "5 borse di studio per l'anno 26/27",
+      "Destinate a studenti meritevoli (merito scolastico, comportamento e impegno sociale) e con limitata capacità economica",
+      "Per chi si iscrive ad uno dei nostri indirizzi liceali",
     ],
   },
   benessere: {
-    titolo: "Benessere a scuola: Come è impostata l’organizzazione della scuola per farti stare bene",
+    titolo: "Benessere a scuola: Come è impostata l'organizzazione della scuola per farti stare bene",
     // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
     icon: React.createElement(Sparkles, { size: 24 }),
     contenuto: [
       "Settimana corta", "Sessioni didattiche di 50 minuti", "Interrogazioni e verifiche programmate",
       "Approccio universitario nell'organizzazione dello studio e quindi clima sereno e disteso",
       "Bar e mensa interni", "Sportello psicologico settimanale", "Attività di orientamento fin dal primo anno",
-      "Attività teatrale - Teatro all’Opera", "Tornei sportivi pomeridiani", "Collaborazione con Accademia Musicale Santa Cecilia",
+      "Attività teatrale - Teatro all'Opera", "Tornei sportivi pomeridiani", "Collaborazione con Accademia Musicale Santa Cecilia",
     ],
   },
   mondo: {

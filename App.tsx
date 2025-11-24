@@ -88,9 +88,9 @@ export default function App() {
 
     // Se c'è un solo vincitore, controlla se il secondo è molto vicino
     if (topEntries.length === 1 && entries.length > 1) {
-      const winnerScore = topEntries[0][1];
+      const winnerScore = topEntries[0][1] as number;
       const secondPlace = entries[1];
-      const secondPlaceScore = secondPlace[1];
+      const secondPlaceScore = secondPlace[1] as number;
       
       if (winnerScore - secondPlaceScore <= NEAR_MISS_DELTA) {
         topEntries.push(secondPlace);
@@ -144,13 +144,6 @@ export default function App() {
     setDettaglioModale(null);
     setShowCatalog(false);
     setQuizKey(prev => prev + 1);
-  }
-
-  function buildExplanation(): string | null {
-    const keys = Object.keys(answers).filter((k) => k.startsWith("scenario"));
-    const picked = keys.map((k) => labels[answers[k]]).filter(Boolean);
-    if (!picked.length) return null;
-    return `Le tue risposte: ${picked.join(" · ")}.`;
   }
 
   return (
