@@ -19,7 +19,7 @@ export const approfondimenti: Approfondimenti = {
     // FIX: Replaced JSX syntax with React.createElement to be valid in a .ts file.
     icon: React.createElement(Globe, { size: 24 }),
     contenuto: [
-      "Frequentare alcune discipline scolastiche in lingua inglese.",
+      "Frequentare lezioni di materie scolastiche in lingua inglese.",
       "Utilizzare materiale didattico pubblicato dalla Cambridge University.",
       "Avvalersi della competenza di docenti formati e certificati dalla Cambridge University.",
       "Poter sostenere gli esami IGCSE, gli stessi che i tuoi coetanei britannici superano a 16 anni.",
