@@ -93,7 +93,7 @@ export const confrontoById: Record<string, Confronto> = {
   "scientifico-int": { righe: ["+ 2 ore a settimana al biennio e 1 al triennio di business studies", "+ 1 ora a settimana laboratorio fisica/chimica", "Metodo didattico Cambridge basato su team work e problem solving"] },
   "linguistico-moderno": { righe: ["+ 230 ore/anno di inglese", "Storia dell'arte sia al biennio che al triennio"] },
   "linguistico-giuridico": { righe: ["+ 165 ore/anno di inglese", "latino per 5 anni invece che al biennio", "2 lingue straniere (inglese + 1 lingua comunitaria a scelta) invece di 3", "+ 4/5 ore settimanali di materie in ambito giuridico economico", "+ 1 ora settimanale di matematica"] },
-  "scienze-umane-es": { righe: ["+ 627 ore/anno di lingua straniera", "+ 1 ora a settimana di inglese al biennio", "+ 2 ore a settimana di psicologia al biennio", "Approccio laboratoriale, ogni anno un laboratorio con tema differente"] },
+  "scienze-umane-es": { righe: ["+ 627 ore di lingua straniera nei 5 anni", "+ 1 ora a settimana di inglese al biennio", "+ 2 ore a settimana di psicologia al biennio", "Approccio laboratoriale, ogni anno un laboratorio con tema differente"] },
 };
 
 // Labels for UI
