@@ -10,8 +10,10 @@ interface StepCardProps {
 }
 
 export const StepCard: React.FC<StepCardProps> = ({ children, title, subtitle, showCambridgeLogo }) => {
+  const MotionDiv = motion.div as any;
+
   return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="w-full">
+    <MotionDiv initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="w-full">
       <div className="rounded-2xl shadow-xl p-6 md:p-10 flex flex-col" style={{ background: BLU, color: "white", border: `2px solid ${GIALLO}` }}>
         <div>
           <div className="flex justify-between items-center gap-3 mb-4">
@@ -32,6 +34,6 @@ export const StepCard: React.FC<StepCardProps> = ({ children, title, subtitle, s
           {children}
         </div>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };

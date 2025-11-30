@@ -11,6 +11,7 @@ interface ModaleApprofondimentoProps {
 
 export const ModaleApprofondimento: React.FC<ModaleApprofondimentoProps> = ({ dettaglio, onClose }) => {
   const item = approfondimenti[dettaglio];
+  const MotionDiv = motion.div as any;
 
   if (!item) return null;
 
@@ -18,20 +19,20 @@ export const ModaleApprofondimento: React.FC<ModaleApprofondimentoProps> = ({ de
   const titoloVisibile = partiTitolo.length > 1 ? partiTitolo.slice(1).join(':').trim() : item.titolo;
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-60"
       onClick={onClose}
     >
-      <motion.div
+      <MotionDiv
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className="w-full max-w-lg rounded-2xl p-6 md:p-8 shadow-2xl relative"
         style={{ background: "white", color: BLU, border: `4px solid ${GIALLO}` }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         <button onClick={onClose} className="absolute top-4 right-4 rounded-full p-2 hover:bg-gray-100 transition-colors" style={{ color: BLU }}>
           <X size={24} />
@@ -53,7 +54,7 @@ export const ModaleApprofondimento: React.FC<ModaleApprofondimentoProps> = ({ de
             Chiudi
           </button>
         </div>
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 };

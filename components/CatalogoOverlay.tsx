@@ -15,6 +15,7 @@ interface CatalogoOverlayProps {
 export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose, licei, onApprofondisci }) => {
   const [sectionMinHeights, setSectionMinHeights] = useState({ profile: 0, cambridge: 0, confronto: 0 });
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const MotionDiv = motion.div as any;
 
   useLayoutEffect(() => {
     if (show && licei.length > 0) {
@@ -56,14 +57,14 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 p-6 md:p-10 overflow-y-auto"
           style={{ background: GRIGIO }}
         >
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -113,8 +114,8 @@ export const CatalogoOverlay: React.FC<CatalogoOverlayProps> = ({ show, onClose,
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

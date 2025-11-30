@@ -1,3 +1,4 @@
+
 import React, { useEffect, useMemo, useState, useLayoutEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, RotateCcw, Sparkles, List, Maximize, Minimize } from "lucide-react";
@@ -172,7 +173,7 @@ export default function App() {
                     </button>
                   </div>
                   <div className="mt-6 text-center text-sm text-white opacity-80">
-                    <span className="font-bold">Licei Opera Sant'Alessandro</span> – imparare a stare al mondo
+                    <span className="font-bold">Licei Opera Sant'Alessandro</span> – imparare a stare nel mondo
                   </div>
                 </StepCard>
               )}
@@ -186,7 +187,7 @@ export default function App() {
                   </div>
                   <div className="mt-6 flex items-center justify-between">
                     <button onClick={() => setIndice((i) => Math.max(0, i - 1))} className="flex items-center gap-2 text-white underline hover:opacity-80 transition-opacity"><ChevronLeft /> Indietro</button>
-                    <span className="text-sm text-white opacity-80 hidden md:inline"><span className="font-bold">Licei Opera Sant'Alessandro</span> – imparare a stare al mondo</span>
+                    <span className="text-sm text-white opacity-80 hidden md:inline"><span className="font-bold">Licei Opera Sant'Alessandro</span> – imparare a stare nel mondo</span>
                     <span className="text-sm opacity-80">Passo {indice} di {steps.length - 2}</span>
                   </div>
                 </StepCard>
